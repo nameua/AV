@@ -40,16 +40,6 @@ public class LogInToThePortal {
 		logger.info("Trying to navigate login page: " + Link.LOCAL.getURL());
 		return webDriver;
 	}
-//
-//	private void loginAsUserToThePortal() {
-//		webDriver = navigateToTheLoginPage();
-//		loginPageSteps = new LoginPageSteps(webDriver);
-//		loginPageSteps.fillOutLoginTextField(ADMIN.getLogin());
-//		loginPageSteps.fillOutPasswordTextField(ADMIN.getPassword());
-//		loginPageSteps.clickOnLoginButton();
-//		webDriver.close();
-//	}
-
 
 	private void loginAsUserToThePortal() {
 		webDriver = navigateToTheLoginPage();
@@ -62,5 +52,4 @@ public class LogInToThePortal {
 		webDriver.close();
 	}
 
-	//landingPageSteps.verifyWelcomeLabelPresentedOnThePage();
 }
