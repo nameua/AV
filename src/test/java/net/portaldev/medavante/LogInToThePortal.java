@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import portal.settings.Link;
+import portal.steps.LandingPageSteps;
 import portal.steps.LoginPageSteps;
 import portal.utils.PropertiesLoader;
 import portal.utils.User;
@@ -24,11 +25,12 @@ public class LogInToThePortal {
 	protected static final User ADMIN = new User(testingProperties.getProperty("admin.login"),
 			testingProperties.getProperty("admin.password"));
 	protected LoginPageSteps loginPageSteps;
+	protected LandingPageSteps landingPageSteps;
 
 	@Test
-	public  void loginAsAdministrator() {
+	public  void loginAsUser() {
 		navigateToTheLoginPage();
-		loginAsAdministratorToTheApplication();
+		loginAsUserToThePortal();
 	}
 
 	private WebDriver navigateToTheLoginPage() {
@@ -38,12 +40,27 @@ public class LogInToThePortal {
 		logger.info("Trying to navigate login page: " + Link.LOCAL.getURL());
 		return webDriver;
 	}
+//
+//	private void loginAsUserToThePortal() {
+//		webDriver = navigateToTheLoginPage();
+//		loginPageSteps = new LoginPageSteps(webDriver);
+//		loginPageSteps.fillOutLoginTextField(ADMIN.getLogin());
+//		loginPageSteps.fillOutPasswordTextField(ADMIN.getPassword());
+//		loginPageSteps.clickOnLoginButton();
+//		webDriver.close();
+//	}
 
-	private void loginAsAdministratorToTheApplication() {
+
+	private void loginAsUserToThePortal() {
 		webDriver = navigateToTheLoginPage();
 		loginPageSteps = new LoginPageSteps(webDriver);
+		landingPageSteps = new LandingPageSteps(webDriver);
 		loginPageSteps.fillOutLoginTextField(ADMIN.getLogin());
 		loginPageSteps.fillOutPasswordTextField(ADMIN.getPassword());
+		loginPageSteps.clickOnLoginButton();
+		landingPageSteps.verifyWelcomeLabelPresentedOnThePage();
 		webDriver.close();
 	}
+
+	//landingPageSteps.verifyWelcomeLabelPresentedOnThePage();
 }
